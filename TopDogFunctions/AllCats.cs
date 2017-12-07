@@ -34,8 +34,7 @@ namespace TopDogFunctions
                 ImageUrl = d.field_animal_thumbnail
             });
 
-            return req.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(results),
-                new JsonMediaTypeFormatter());
+            return req.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(results), "application/json");
         }
     }
 }
