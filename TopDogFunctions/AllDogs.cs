@@ -31,7 +31,7 @@ namespace TopDogFunctions
                 Name = d.title,
                 Breed = d.field_animal_breed,
                 IsChildFriendly = d.field_animal_child_suitability,
-                ImageUrl = d.field_animal_thumbnail
+                ImageUrl = "https:" + d.field_animal_thumbnail
             });
 
             return new HttpResponseMessage(HttpStatusCode.OK)

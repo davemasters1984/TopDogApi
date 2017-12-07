@@ -41,12 +41,12 @@ namespace TopDogFunctions
                     Gender = d.field_animal_sex,
                     Size = d.field_animal_size,
                     Breed = d.field_animal_breed,
-                    ImageUrl = d.field_animal_thumbnail,
+                    ImageUrl = "https:" + d.field_animal_thumbnail,
                     Location = d.field_animal_centre,
                     IsChildFriendly = d.field_animal_child_suitability,
                     IsCatFriendly = d.field_animal_cat_suitability,
                     IsDogFriendly = d.field_animal_dog_suitability,
-                    Path = d.path,
+                    Path = "https://www.battersea.org.uk" + d.path,
                     Rehomed = d.field_animal_rehomed,
                     Reserved = d.field_animal_reserved                 
                 });
