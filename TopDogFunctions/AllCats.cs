@@ -2,6 +2,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -34,7 +35,10 @@ namespace TopDogFunctions
                 ImageUrl = d.field_animal_thumbnail
             });
 
-            return req.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(results), "application/json");
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(results), Encoding.UTF8, "application/json")
+            };
         }
     }
 }
