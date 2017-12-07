@@ -12,7 +12,7 @@ namespace TopDogFunctions
 {
     public static class DogByName
     {
-            [FunctionName("DobByName")]
+            [FunctionName("DogByName")]
             public static async Task<HttpResponseMessage> Run(
                 [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "dogname")] HttpRequestMessage req, 
                 TraceWriter log)

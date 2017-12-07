@@ -26,7 +26,7 @@ namespace TopDogFunctions
                 dogs = JsonConvert.DeserializeObject<RootObject>(json);
             }
 
-            var results = dogs.Animals.Values.ToList().Select(d => new ApiFormattedAnimals
+            var results = dogs.Animals.Values.ToList().Select(d => new ApiAnimalsFormatted
             {
                 Name = d.title,
                 Breed = d.field_animal_breed,

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TopDogFunctions
 {
-    class ApiFormattedAnimals
+    class ApiAnimalsFormatted
     {
         public string Name { get; set; }
         public string Breed { get; set; }
