@@ -10,13 +10,21 @@ using System.Text;
 
 namespace TopDogFunctions
 {
-    public static class DogsRehoming
+    public static class DogByGender
     {
-        [FunctionName("DogsRehoming")]
+        [FunctionName("DogByGender")]
         public static async Task<HttpResponseMessage> Run(
-                [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "dogsrehoming")] HttpRequestMessage req,
+                [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "doggender")] HttpRequestMessage req,
                 TraceWriter log)
         {
+
+            // parse query parameter
+            string gender = req.GetQueryNameValuePairs()
+                .FirstOrDefault(q => string.Compare(q.Key, "gender", true) == 0)
+                .Value;
+
+            if (string.IsNullOrWhiteSpace(gender))
+                return req.CreateResponse(HttpStatusCode.OK);
 
             RootObject dogByName;
             using (var client = new WebClient())
@@ -26,12 +34,13 @@ namespace TopDogFunctions
                 dogByName = JsonConvert.DeserializeObject<RootObject>(json);
             }
 
-            var results = dogByName.Animals.Values.ToList().Where(d => d.field_animal_rehomed.ToLowerInvariant() == "").Select(d => new ApiAnimalDetails()
+            var results = dogByName.Animals.Values.ToList().Where(d => d.field_animal_sex.ToLowerInvariant() == gender.ToLowerInvariant()).Select(d => new ApiAnimalDetails()
             {
                 Name = d.title,
+                Gender = d.field_animal_sex,
                 Breed = d.field_animal_breed,
-                IsChildFriendly = d.field_animal_child_suitability,
-                ImageUrl = "https:" + d.field_animal_thumbnail
+                ImageUrl = "https:" + d.field_animal_thumbnail,
+                Location = d.field_animal_centre,
             });
 
             return new HttpResponseMessage(HttpStatusCode.OK)
